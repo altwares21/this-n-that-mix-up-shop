@@ -68,24 +68,23 @@ const Home = () => {
             {/* Apparel Product Links */}
             <div className="w-full max-w-4xl px-4 mt-12">
                 <h2 className="text-2xl font-bold mb-4 text-center">Apparel</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedApparelProducts.map((product) => (
-                        <Link
-                            to={`/product/${product.id}`} // Dynamic link to Product.jsx
-                            key={product.id}
-                            className="relative group"
-                        >
-                            <div className="relative w-full h-64 mx-auto">
-                                <img
-                                    src={product.images[0]} // Use the first image from the product
-                                    alt={product.name}
-                                    className="w-full h-full object-cover rounded-lg shadow-lg"
-                                />
-                                <div className="text-center mt-2">
-                                    <span className="text-lg font-bold">{product.name}</span>
+                        <div key={product.id} className="relative group">
+                            <Link to={`/product/${product.id}`}>
+                                <div className="relative w-64 h-64 mx-auto"> {/* Fixed square dimensions */}
+                                    <img
+                                        src={product.images[0]} // Use the first image from the product
+                                        alt={product.name}
+                                        className="w-full h-full object-cover rounded-lg shadow-lg"
+                                    />
                                 </div>
+                            </Link>
+                            <div className="text-center mt-2">
+                                <span className="text-lg font-bold">{product.name}</span>
+                                <p className="text-gray-600">${product.price.toFixed(2)}</p>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -93,24 +92,23 @@ const Home = () => {
             {/* Accessories Product Links */}
             <div className="w-full max-w-4xl px-4 mt-12">
                 <h2 className="text-2xl font-bold mb-4 text-center">Accessories</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedAccessoriesProducts.map((product) => (
-                        <Link
-                            to={`/product/${product.id}`} // Dynamic link to Product.jsx
-                            key={product.id}
-                            className="relative group"
-                        >
-                            <div className="relative w-full h-64 mx-auto">
-                                <img
-                                    src={product.images[0]} // Use the first image from the product
-                                    alt={product.name}
-                                    className="w-full h-full object-cover rounded-lg shadow-lg"
-                                />
-                                <div className="text-center mt-2">
-                                    <span className="text-lg font-bold">{product.name}</span>
+                        <div key={product.id} className="relative group">
+                            <Link to={`/product/${product.id}`}>
+                                <div className="relative w-64 h-64 mx-auto"> {/* Fixed square dimensions */}
+                                    <img
+                                        src={product.images[0]} // Use the first image from the product
+                                        alt={product.name}
+                                        className="w-full h-full object-cover rounded-lg shadow-lg"
+                                    />
                                 </div>
+                            </Link>
+                            <div className="text-center mt-2">
+                                <span className="text-lg font-bold">{product.name}</span>
+                                <p className="text-gray-600">${product.price.toFixed(2)}</p>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -118,29 +116,26 @@ const Home = () => {
             {/* Figures Product Links */}
             <div className="w-full max-w-4xl px-4 mt-12">
                 <h2 className="text-2xl font-bold mb-4 text-center">Figures</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedFiguresProducts.map((product) => (
-                        <Link
-                            to={`/product/${product.id}`} // Dynamic link to Product.jsx
-                            key={product.id}
-                            className="relative group"
-                        >
-                            <div className="relative w-full h-64 mx-auto">
-                                <img
-                                    src={product.images[0]} // Use the first image from the product
-                                    alt={product.name}
-                                    className="w-full h-full object-cover rounded-lg shadow-lg"
-                                />
-                                <div className="text-center mt-2">
-                                    <span className="text-lg font-bold">{product.name}</span>
+                        <div key={product.id} className="relative group">
+                            <Link to={`/product/${product.id}`}>
+                                <div className="relative w-64 h-64 mx-auto"> {/* Fixed square dimensions */}
+                                    <img
+                                        src={product.images[0]} // Use the first image from the product
+                                        alt={product.name}
+                                        className="w-full h-full object-cover rounded-lg shadow-lg"
+                                    />
                                 </div>
+                            </Link>
+                            <div className="text-center mt-2">
+                                <span className="text-lg font-bold">{product.name}</span>
+                                <p className="text-gray-600">${product.price.toFixed(2)}</p>
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>
-
-
         </div>
     );
 };

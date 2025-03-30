@@ -1,73 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // Import useSelector to access the cart state
 import logo from '../assets/images/logo.png'; // Import the logo
+import { FaShoppingCart, FaSearch } from 'react-icons/fa'; // Import cart and search icons
 
 const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false); // State to toggle the hamburger menu
+    const cartItems = useSelector((state) => state.cart); // Access the cart state from Redux
+    const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0); // Calculate total quantity
+
     return (
         <header className="bg-orange-500 text-white sticky top-0 z-50">
-            <div className="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+            <div className="container mx-auto flex items-center justify-between py-2 px-6">
+                {/* Hamburger Menu Button (Visible on small screens) */}
+                <button
+                    className="sm:hidden text-white text-2xl focus:outline-none"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    ☰
+                </button>
+
                 {/* Logo */}
-                <Link to="/" className="flex items-center">
-                    <img src={logo} alt="This N That Mix Up Shop Logo" className="h-10" />
+                <Link to="/" className="flex items-center mx-auto sm:mx-0">
+                    <img src={logo} alt="This N That Mix Up Shop Logo" className="h-12" />
                 </Link>
 
-                {/* Navigation */}
-                <nav className="flex items-center space-x-6">
-                    {/* Home Link */}
-                    <Link to="/" className="hover:underline">
-                        Home
-                    </Link>
-
-                    {/* Shop Dropdown */}
-                    <div className="relative group">
-                        <button className="hover:underline focus:outline-none">
-                            Shop
-                        </button>
-                        <div className="absolute left-0 mt-2 hidden bg-white text-black shadow-lg rounded w-40 group-hover:flex flex-col">
-                            <Link
-                                to="/apparel"
-                                className="block px-4 py-2 hover:bg-gray-200"
-                            >
-                                Apparel
-                            </Link>
-                            <Link
-                                to="/accessories"
-                                className="block px-4 py-2 hover:bg-gray-200"
-                            >
-                                Accessories
-                            </Link>
-                            <Link
-                                to="/figures"
-                                className="block px-4 py-2 hover:bg-gray-200"
-                            >
-                                Figures
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* About Us */}
-                    <Link to="/about-us" className="hover:underline">
-                        About Us
-                    </Link>
-
-                    {/* Cart */}
-                    <Link to="/cart" className="hover:underline">
-                        Cart
-                    </Link>
-                </nav>
-
-                {/* Search Bar */}
-                <div className="relative w-full mt-4 sm:mt-0 sm:w-auto">
-                    <input
-                        type="text"
-                        placeholder="What are you looking for?"
-                        className="w-full sm:w-64 px-4 py-2 rounded-full text-black focus:outline-none"
-                    />
-                    <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black">
-                        🔍
+                {/* Search Bar (Visible on small screens) */}
+                <div className="sm:hidden flex items-center">
+                    <button className="text-white">
+                        <FaSearch />
                     </button>
                 </div>
+
+                {/* Navigation Links and Search Bar (Visible on large screens) */}
+                <div className="hidden sm:flex items-center justify-between flex-grow">
+                    {/* Navigation Links */}
+                    <nav className="flex items-center justify-center space-x-6 flex-grow">
+                        <Link to="/" className="hover:underline">
+                            Home
+                        </Link>
+                        <Link to="/apparel" className="hover:underline">
+                            Apparel
+                        </Link>
+                        <Link to="/accessories" className="hover:underline">
+                            Accessories
+                        </Link>
+                        <Link to="/figures" className="hover:underline">
+                            Figures
+                        </Link>
+                        <Link to="/about-us" className="hover:underline">
+                            About Us
+                        </Link>
+                        <Link to="/cart" className="relative flex items-center hover:underline">
+                            <FaShoppingCart className="text-xl" /> {/* Cart Icon */}
+                            {cartCount > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </Link>
+                    </nav>
+
+                    {/* Search Bar */}
+                    <div className="flex items-center w-50 ml-6">
+                        <input
+                            type="text"
+                            placeholder="Looking for something?"
+                            className="w-full px-4 py-2 rounded-full text-black focus:outline-none"
+                        />
+                        <button className="ml-2 text-white">
+                            <FaSearch />
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            {/* Mobile Menu (Visible when menuOpen is true) */}
+            {menuOpen && (
+                <div className="sm:hidden bg-orange-500 text-white">
+                    <nav className="flex flex-col items-center space-y-4 py-4">
+                        <Link to="/" className="hover:underline" onClick={() => setMenuOpen(false)}>
+                            Home
+                        </Link>
+                        <Link to="/apparel" className="hover:underline" onClick={() => setMenuOpen(false)}>
+                            Apparel
+                        </Link>
+                        <Link to="/accessories" className="hover:underline" onClick={() => setMenuOpen(false)}>
+                            Accessories
+                        </Link>
+                        <Link to="/figures" className="hover:underline" onClick={() => setMenuOpen(false)}>
+                            Figures
+                        </Link>
+                        <Link to="/about-us" className="hover:underline" onClick={() => setMenuOpen(false)}>
+                            About Us
+                        </Link>
+                        <Link to="/cart" className="hover:underline flex items-center" onClick={() => setMenuOpen(false)}>
+                            <FaShoppingCart className="mr-2" /> Cart
+                        </Link>
+                    </nav>
+                </div>
+            )}
         </header>
     );
 };

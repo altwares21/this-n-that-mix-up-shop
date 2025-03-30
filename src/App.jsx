@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -27,6 +29,7 @@ const App = () => {
                     <Route path="/collections" component={Collections} />
                 </Switch>
             </Layout>
+            <ToastContainer pauseOnHover={false} autoClose={1500} />
         </Router>
     );
 };

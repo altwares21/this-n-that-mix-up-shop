@@ -7,29 +7,31 @@ const Figures = () => {
     const figures = products.filter((product) => product.category === "Figures");
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4 text-center">Figures</h1>
-            <p className="text-lg text-center mb-4">
-                Explore our collection of figures that bring your favorite characters to life. 
-                From action figures to collectibles, we have something for every fan!
-            </p>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
 
             {/* Figures Section */}
-            <section>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                    {figures.map((product) => (
-                        <div key={product.id} className="border rounded shadow text-center">
-                            <Link to={`/product/${product.id}`}>
-                                <img
-                                    src={product.images[0]}
-                                    alt={product.name}
-                                    className="w-full h-48 object-contain mb-2"
-                                />
-                            </Link>
-                            <h3 className="text-lg font-semibold">{product.name}</h3>
-                            <p className="text-gray-600">${product.price.toFixed(2)}</p>
-                        </div>
-                    ))}
+            <section className="mb-8">
+                <div className="w-full max-w-4xl px-4 mt-12">
+                    <h2 className="text-2xl font-bold mb-4 text-center">Figures</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4"> {/* 2 columns on small screens, 3 on medium */}
+                        {figures.map((product) => (
+                            <div key={product.id} className="relative group">
+                                <Link to={`/product/${product.id}`}>
+                                    <div className="relative w-full h-64 mx-auto"> {/* Fixed square dimensions */}
+                                        <img
+                                            src={product.images[0]} // Use the first image from the product
+                                            alt={product.name}
+                                            className="w-full h-full object-cover rounded-lg shadow-lg"
+                                        />
+                                    </div>
+                                </Link>
+                                <div className="text-center mt-2">
+                                    <span className="text-lg font-bold">{product.name}</span>
+                                    <p className="text-gray-600">${product.price.toFixed(2)}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         </div>
